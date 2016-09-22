@@ -1,0 +1,62 @@
+﻿@using CIS219_LAB2.Models
+@using CIS219_LAB2.Controllers
+
+@model IEnumerable<CIS219_LAB2.Models.GamePlay>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Delete Entire</h2>
+
+<table class="table">
+    
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gameName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.playerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.timeStamp)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gameName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.playerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.timeStamp)
+            </td>
+            <td>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken();
+                    <input type="hidden" name="id" value="@Html.DisplayFor(modelItem => item.id)" />
+                    <input type="submit" value="Delete" />
+                }
+</td>
+        </tr>
+    }
+
+</table>

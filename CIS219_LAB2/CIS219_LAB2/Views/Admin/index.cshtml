@@ -1,0 +1,38 @@
+﻿@using CIS219_LAB2.Models
+@using CIS219_LAB2.Controllers
+
+@model IEnumerable<CIS219_LAB2.Models.GamePlay>
+
+@{
+    ViewBag.Title = "Admin Controls";
+}
+
+<div class="jumbotron">
+    <h1>Biggest - Admin Page</h1>
+    <p class="lead">A desk is a dangerous place from which to view the world.<br/>-John Le Caré
+
+</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Delete Leaderbord Entire</h2>
+        <p>
+            Our show is about starting over.<br/>-Jai Rodriguez
+        </p>
+        <p>@Html.ActionLink("Delete Entire >>", "EmptyLeaderBorad", "admin")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Remove A User</h2>
+        <p> I have been asked what would I ban immediately if I could. Advertising.<br/>-Vivienne Westwood</p>
+        <p>@Html.ActionLink("Delete Plays >>", "RemoveUser", "admin")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Promote A User </h2>
+        <p>Your health, wealth, position, performance, ability and attitude are the results of your decisions<br/>-Israelmore Ayivor</p>
+        <p>@Html.ActionLink("Delete Plays >>", "Prompt", "admin")</p>
+    </div>
+</div>
+
+
+   

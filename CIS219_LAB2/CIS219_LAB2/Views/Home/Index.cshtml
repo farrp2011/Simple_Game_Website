@@ -1,0 +1,39 @@
+﻿@using System
+@{
+    ViewBag.Title = "Home Page";
+    string randGame ="";
+    Random rand = new Random();
+    if (rand.Next(2) == 0)
+    {
+        randGame = "MonsterWantsCandy";
+    }
+    else
+    {
+        randGame = "SoloPong";
+    }
+}
+
+<div class="jumbotron">
+    <h1>Biggest - Home Page</h1>
+    <p class="lead">Play All The Game And Get The Best Score.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Play The Game</h2>
+        <p>
+            This game is amazing!!! Everyone will spend hours play it every day. There is a million levels. 
+        </p>
+        <p>@Html.ActionLink("Play >>", randGame, "games")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Leaderboard</h2>
+        <p></p>
+        <p>@Html.ActionLink("LeaderBord >>", "Index", "gamePlays")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Register</h2>
+        <p>Start a profile and play games.</p>
+        <p>@Html.ActionLink("Register >>", "Register", "Account")</p>
+    </div>
+</div>

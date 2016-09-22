@@ -1,0 +1,43 @@
+﻿@using CIS219_LAB2.Models
+
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Email:</dt>
+        <dd>
+            @ViewBag.email           
+        </dd><br />
+        <dt>@GameOverHelper.MONSTER_W_CANDY_GAME_NAME High Score:</dt>
+        <dd>
+            @ViewBag.MWChighScore
+        </dd><br />
+        <dt>@GameOverHelper.MONSTER_W_CANDY_GAME_NAME Low Score:</dt>
+        <dd>
+            @ViewBag.MWClowScore
+        </dd><br />
+        <dt>@GameOverHelper.MONSTER_W_CANDY_GAME_NAME Average Score:</dt>
+        <dd>
+            @ViewBag.MWCaverageScore
+        </dd><br />
+        <dt>@GameOverHelper.SOLO_PONG_GAME_NAME High Score:</dt>
+        <dd>
+            @ViewBag.SPhighScore
+        </dd><br />
+        <dt>@GameOverHelper.SOLO_PONG_GAME_NAME Low Score:</dt>
+        <dd>
+            @ViewBag.SPlowScore
+        </dd><br />
+        <dt>@GameOverHelper.SOLO_PONG_GAME_NAME Average Score:</dt>
+        <dd>
+            @ViewBag.SPaverageScore
+        </dd><br />
+    </dl>
+</div>

@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNet.Identity
+@using CIS219_LAB2.Models
+@{
+    
+    ViewBag.Title = "Monster Wants Candy";
+    ViewBag.user = GameOverHelper.getUserName(Request.IsAuthenticated, User.Identity.GetUserName());
+}
+
+<!--
+    Uses two scripts and the images in Content.
+-->
+<div>
+    <div id="game" name="game" style="display:block; width: 480px; height: 720px; margin: 20px auto;" > </div>
+</div>
+
+<!-- when the game ends, these form fields are all set and submitted -->
+<!-- NOTE: you may want to route this somewhere other than Games/GameOver, and you may want different fields. -->
+<!-- NOTE: if you change the fields, also change them in ~/Scripts/MonsterWantsCandy.js. -->
+<form id="gameOver" name="gameOver" action='~/GamePlays/Create' method='post' style="display:none;">
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="gameName" name="GameName" value="@GameOverHelper.MONSTER_W_CANDY_GAME_NAME" />
+    <input type="hidden" id="score" name="Score" value="" />
+    <input type="hidden" id="playerName" name="PlayerName" value="@ViewBag.user" />
+    <input type="hidden" id="timeStamp" name="timeStamp" value="" />
+    <input type="submit" id="done" name="done" value="done" style="display:none;" />
+</form>
+
+@section scripts {
+<script src="~/Scripts/phaser-2.0.7.min.js"></script>
+<script src="~/Scripts/MonsterWantsCandy.js"></script>
+<script>
+    (function () {
+        // initialize the framework
+        var game = new Phaser.Game(640, 960, Phaser.AUTO, 'game');
+        // add game states
+        game.state.add('Boot', Candy.Boot);
+        game.state.add('Preloader', Candy.Preloader);
+        game.state.add('MainMenu', Candy.MainMenu);
+        game.state.add('Game', Candy.Game);
+        // start the Boot state
+        game.state.start('Boot');
+        document.getElementById('whenScored').value = date();
+    })();
+</script>
+}

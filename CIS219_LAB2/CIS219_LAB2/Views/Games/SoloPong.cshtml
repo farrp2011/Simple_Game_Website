@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNet.Identity
+@using CIS219_LAB2.Models
+@{
+
+    ViewBag.Title = "Solo Pong";
+    ViewBag.user = GameOverHelper.getUserName(Request.IsAuthenticated, User.Identity.GetUserName());
+}
+
+<!--
+    Uses one scripts and the sound files in Content.
+-->
+
+        <canvas id="soloPong" name="soloPong" width="600" height="300" style="display: block; margin: auto; border: 1px solid black;"></canvas>
+        <audio preload="true" id="collide">
+            <source src="/Content/images/Metal%20Cling%20-%20Hit.mp3" />
+            <source src="/Content/images/Metal%20Cling%20-%20Hit.wav" />
+        </audio>
+
+
+<p>Based on this <a href="http://cssdeck.com/labs/ping-pong-game-tutorial-with-html5-canvas-and-sounds">Ping-pong tutorial by Kushagra Agarwal</a></p>
+
+<!-- when the game ends, these form fields are all set and submitted -->
+<!-- NOTE: you may want to route this somewhere other than Games/GameOver, and you may want different fields. -->
+<!-- NOTE: if you change the fields, also change them in ~/Scripts/SoloPong.js. -->
+<form id="gameOver" name="gameOver" action='~/GamePlays/Create' method='post' style="display:none;">
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="gameName" name="GameName" value="@GameOverHelper.SOLO_PONG_GAME_NAME" />
+    <input type="hidden" id="score" name="Score" value="" />
+    <input type="hidden" id="playerName" name="PlayerName" value="@ViewBag.user" />
+    <input type="hidden" id="timeStamp" name="timeStamp" value="" />
+    <input type="submit" id="done" name="done" value="done" style="display:none;" />
+</form>
+
+@section scripts {
+    <script src="~/Scripts/SoloPong.js"></script>
+    <script>
+        // Show the start screen
+        startScreen();
+    </script>
+}

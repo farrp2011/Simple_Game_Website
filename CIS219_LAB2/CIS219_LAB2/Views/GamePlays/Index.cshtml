@@ -1,0 +1,82 @@
+﻿@using CIS219_LAB2.Models
+@using CIS219_LAB2.Controllers
+
+@model IEnumerable<CIS219_LAB2.Models.GamePlay>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <form action="~/GamePlays" method="post">
+            @Html.AntiForgeryToken()
+            <th>
+                Select Game
+                <select name="@GamePlaysController.RADIO_SEL_NAME">
+                    <option value="@GamesController.ALL_GAMES">@GamesController.ALL_GAMES</option>
+                    <option value="@GameOverHelper.SOLO_PONG_GAME_NAME">@GameOverHelper.SOLO_PONG_GAME_NAME</option>
+                    <option value="@GameOverHelper.MONSTER_W_CANDY_GAME_NAME">@GameOverHelper.MONSTER_W_CANDY_GAME_NAME</option>
+                </select>
+            </th>
+            <th></th>
+            <th>Top Players <input name="@GamePlaysController.NUMBER_SEL_NAME" type="number" value="@GamePlaysController.DEFALT_TOP_PLAYS"> </th>
+            <th><input type="submit" value="Submit"></th>
+            <th></th>
+        </form>
+    </tr> 
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.gameName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.playerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.timeStamp)
+        </th>
+        <th></th>
+    </tr>
+   
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.gameName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.score)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.playerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.timeStamp)
+        </td>
+        <td>
+            
+               @if(User.Identity.Name.Equals(Html.DisplayFor(modelItem => item.playerName)))
+               {
+                   @Html.BeginForm()
+                   {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Html.DisplayFor(modelItem => item.id)" />
+                        <input type="submit" value="Delete" />
+                   }
+               }
+            
+                
+            
+            
+        </td>
+    </tr>
+}
+
+</table>
